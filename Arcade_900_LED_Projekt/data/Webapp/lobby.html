@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="lobby.css" rel="stylesheet" type="text/css">
+    <link href="Controller.css" rel="stylesheet" type="text/css">
+    <link href="Arcade.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!-- Wechsler für Spielesteuerungs-Ansicht  -->
+    <div class="outer button">
+        <button id="show" onclick="showControls()">View Controller</button>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Elemente der Host-Ansicht  -->
+    <div id="hostElements" class="hidden">
+        <div id="arrow" class="hidden arrow"></div>
+        <p style="color:rgb(211, 61, 131);">you are the Host! Create a Lobby</p>
+        <div id="loader" class="centerloader loader"></div>
+        <div id="checkmark" class="hidden checkmark"></div>
+        <div id="start" class="outer button">
+            <button id="create" onclick="createLobby(); setitem()">Create Lobby</button>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <!-- möglicher Button für debugging der Spieleranzahl. Funktion in lobby.js enthalten -->
+        <!--<button id="test" onclick="getPlayers()">Get #Nr of connected players</button>-->
+    </div>
+
+    <!-- Elemente der Spieler-Ansicht  -->
+    <div id="playerElements" class="hidden">
+        <p style="color:rgb(211, 61, 131);">you are a player! Join the game or leave</p>
+        <div id="start" class="outer button">
+            <button id="playerButton" onclick="joinLobby()">join game</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="loader" class="centerloader loader"></div>
+        <div id="checkmark" class="hidden checkmark"></div>
+      </div>
+    <!--------------------------------------------------------------------------------------------------------------------->
+        <div id="hiddenPage" style="display: none;">
+        <!-- versteckten Seite mit den Spielsteuerungen -->
+        <div class="center-top">
+            <span class="direction-button-up" ontouchstart="Button(new Uint8Array([0, 1]))" ontouchend="Button(new Uint8Array([0, 0]))"><img src="right-arrow.png" style="transform:rotate(270deg);"></span>
+        </div>
+    
+        <div class="center-left">
+            <span class="direction-button-left" ontouchstart="Button(new Uint8Array([1,1]))" ontouchend="Button(new Uint8Array([1,0]))"><img src="right-arrow.png" style="transform:rotate(180deg);">
+            </span>
+        </div>
+    
+        <div class="center-center">
+            <span class="direction-button-down" ontouchstart="Button(new Uint8Array([2, 1]))" ontouchend="Button(new Uint8Array([2,0]))"><img src="right-arrow.png" style="transform:rotate(90deg);">
+            </span>
+        </div>
+        
+        <div class="center-right">
+            <span class="direction-button-right" ontouchstart="Button(new Uint8Array([3, 1]))" ontouchend="Button(new Uint8Array([3,0]))"><img src="right-arrow.png">
+            </span>
+        </div>
+
+        <div class="aligned-a">
+            <span class='entry-button-a' ontouchstart="Button(new Uint8Array([4, 1]))" ontouchend="Button(new Uint8Array([4,0]))">A</span>
+        </div>
+        
+        <div class="aligned-b">
+            <span class='entry-button-b' ontouchstart="Button(new Uint8Array([5, 1]))" ontouchend="Button(new Uint8Array([5,0]))">B</span>  
+        </div>
+
+        <span class='select-btn' ontouchstart="Button(new Uint8Array([6, 1]))" ontouchend="Button(new Uint8Array([6,0]))">SELECT</span>
+        <span class='start-btn' ontouchstart="Button(new Uint8Array([7, 1]))" ontouchend="Button(new Uint8Array([7,0]))">START</span>
+    
+        
+        
+    </div>
+
+    <script type="text/javascript" src="lobby.js"></script>
+    
+    <script>
+        //Eventlistener für Touchaktionen
+        document.addEventListener("touchstart", (event) => {});
+        document.addEventListener("touchend", (event) => {});
+
+        var previousPage = document.referrer; 
+        //Detektieren der vorherigen Seite für gewünschte Ansicht
+        if (previousPage=='http://192.168.4.1/Webapp/gameselect.html'){
+            document.getElementById('hostElements').classList.remove('hidden');
+            localStorage.setItem("Host", "true");
+            localStorage.setItem("Player", "false"); 
+        }
+        else if (previousPage == 'http://192.168.4.1/Webapp/main.html'){
+            document.getElementById('playerElements').classList.remove('hidden');
+            localStorage.setItem("Host", "false");
+            localStorage.setItem("Player", "true"); 
+        }
+        //Ein-/Ausblenden der Elemente nach Betätigen des Knopfs für die Spielesteuerung
+        function showControls() {
+            var hiddenPage = document.getElementById("hiddenPage");
+            hiddenPage.style.display = "block";
+            
+            var hlobby = document.getElementById("hostElements");
+            var plobby = document.getElementById("playerElements");
+            var host = localStorage.getItem("Host");
+            var player = localStorage.getItem("Player");
+
+            if (hlobby.classList.contains("hidden") && host == "true" && hiddenPage.style.display == "block") {
+   
+                hiddenPage.style.display = "none";
+                hlobby.classList.remove("hidden");
+                document.getElementById('loader').classList.remove("hidden");
+                document.getElementById('start').style.display = "block"; 
+                document.getElementById('checkmark').classList.add("hidden");
+            } 
+            else {
+                hlobby.classList.add("hidden");
+                plobby.classList.add("hidden");
+            }
+        }
+
+        localStorage.setItem("Lobbybool", "false");
+        //Hilfsvariable
+        function setitem(){
+            localStorage.setItem("Lobbybool", "true");
+            var value = localStorage.getItem("Lobbybool");
+            if(value == "true"){
+            document.getElementById('arrow').style.display="inline-block"; 
+            document.getElementById('loader').classList.add("hidden");
+            document.getElementById('checkmark').classList.remove("hidden");
+            document.getElementById('start').style.display="none";
+            }
+        }
+    </script>
+</body>
+</html> 
+
+
+ 

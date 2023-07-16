@@ -1,0 +1,110 @@
+/*style*/
+body{
+    margin:0;
+    padding:0;
+    background-color: #000000;
+    color: #f2f2f2
+}
+.hidden{
+  display: none;
+}
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.right{
+  position: absolute; 
+  top: 60%; 
+  left: 70%; 
+  transform: translate(-50%,-50%);
+}
+.outer{
+    position: relative;
+    margin: 0 50px;
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    animation: rotate 1.5s linear infinite;
+  }
+.inner{
+    position: relative;
+    margin: 0 50px;
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+}
+  .button{
+    height: 70px;
+    width: 220px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+  .outer button, .inner button, .outer span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .outer button, .inner button{
+    background: #000000;
+    color: #f2f2f2;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    z-index: 9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .button button{
+    height: 60px;
+    width: 210px;
+    border-radius: 50px;
+  }
+  .outer span, .inner span{
+    height: 100%;
+    width: 100%;
+    background: inherit;
+  }
+  .button span{
+    border-radius: 50px;
+  }
+  .outer:hover span:nth-child(1) {
+    filter: blur(7px);
+  }
+  .outer:hover span:nth-child(2){
+    filter: blur(14px);
+  }
+  
+  /* Infofenster für gestartete Lobbies */
+  .popup{
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+  
+  
+  @keyframes rotate {
+    0%{
+      filter: hue-rotate(0deg);
+    }
+    100%{
+      filter: hue-rotate(360deg);
+    }
+  }
+  @media (max-width: 640px){
+    .center{
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+    .outer, .inner{
+      margin: 50px 0;
+    }
+  }
+ 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade LED: Singleplayer Mode</title>
+    
+</head>
+<link href="Arcade.css" rel="stylesheet" type="text/css">
+<body>
+    <p>Choose a game</p>
+    <div class="center"> 
+        <div id="A" class="inner button">
+            <button id="gameA" onclick="setStateA(); ChangeRef();">Lobby-Test-Spiel</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="B" class="inner button">
+            <button id="gameB" onclick="setStateB(); ChangeRef();">LED-Licht-Test</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="C" class="inner button">
+            <button id="gameC" onclick="display_maps()">Othello</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="D" class="inner button">
+            <button id="gameD" onclick="SetStateD(); ChangeRef();">Snake (2P)</button>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div id="maps" class="right hidden">
+        <div class="inner button">
+            <button id="map1" onclick="SetStateC_Map1(); ChangeRef();">Klassik (2P)</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="inner button">
+            <button id="map2" onclick="SetStateC_Map2(), ChangeRef();">Alternativ (2P)</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="inner button">
+            <button id="map3" onclick="SetStateC_Map3(); ChangeRef();">3-Spieler</button>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="inner button">
+            <button id="map4" onclick="SetStateC_Map4(); ChangeRef();">4-Spieler</button>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+        <script type="text/javascript" src="lobby.js"></script>
+</body>
+<script type="text/javascript">
+
+            //Kartenauswahl für Othello
+            function display_maps(){
+                var maps = document.getElementById("maps"); 
+                document.getElementById("A").classList.add("hidden");
+                document.getElementById("B").classList.add("hidden");
+                document.getElementById("C").classList.add("hidden");
+                document.getElementById("D").classList.add("hidden");
+                maps.classList.remove("hidden");
+            }
+
+            function ChangeRef () {
+                window.location.href="lobby.html";
+            }
+
+            function setStateA () { //testgame
+                localStorage.setItem("GameID", 0);
+                localStorage.setItem("MaxPlayer", 1);
+            }    
+            
+            function setStateB () {//square
+                localStorage.setItem("GameID", 1);
+                localStorage.setItem("MaxPlayer", 2);
+            }
+
+            function SetStateC_Map1() {//othello
+                localStorage.setItem("GameID", 2);
+                localStorage.setItem("MaxPlayer", 2);
+                localStorage.setItem("Map", 0);
+            }
+            function SetStateC_Map2() {//othello map 2p
+                localStorage.setItem("GameID", 2);
+                localStorage.setItem("MaxPlayer", 2);
+                localStorage.setItem("Map", 1);
+            }
+            function SetStateC_Map3() {//othello map 3p
+                localStorage.setItem("GameID", 2);
+                localStorage.setItem("MaxPlayer", 3);
+                localStorage.setItem("Map", 2);
+            }
+            function SetStateC_Map4() {//othello map 4p
+                localStorage.setItem("GameID", 2);
+                localStorage.setItem("MaxPlayer", 4);
+                localStorage.setItem("Map", 3);
+            }
+            function SetStateD () {//snake
+                localStorage.setItem("GameID", 3);
+                localStorage.setItem("MaxPlayer", 2);
+                }
+            
+
+        </script>
+</html>

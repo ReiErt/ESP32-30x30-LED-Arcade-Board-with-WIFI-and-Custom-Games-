@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade LED: Multiplayer Mode</title>
+    
+</head>
+<link href="Arcade.css" rel="stylesheet" type="text/css">
+<body>
+    <script type="text/javascript" src="lobby.js"></script>
+    
+    <p>choose a new game oder enter an existing group</p>
+      
+    <div class="center"> 
+    
+        <div id="myPopup" class="popup hidden">
+            <span>Ein Spiel läuft bereits!</span>
+        </div>
+
+        <div id="start" class="inner button">
+            <button id="startnew" >Starte ein neues Spiel</button>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="inner button">
+            <button id="enterexist">Einem Spiel beitreten</button>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script>
+    
+    getData();
+
+    document.getElementById("startnew").onclick = function () {
+    // Weiterleitung zur nächsten Seite
+        location.href = "gameselect.html";
+    };
+    document.getElementById("enterexist").onclick = function () {
+        location.href = "lobby.html";
+    };
+    
+</script>
